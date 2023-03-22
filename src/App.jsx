@@ -6,6 +6,8 @@ import { Balance } from './components/Balance';
 import { BillsList } from './components/BillsList';
 import { ButtonOpenDialog } from './components/ButtonOpenDialog';
 import { FiX } from "react-icons/fi";
+import { bubble	 as Menu } from 'react-burger-menu'
+import { stylesMenu } from './utils/styleMenu';
 
 
 import './styles/global.css'
@@ -72,37 +74,53 @@ export function App() {
       .catch((error) => console.error(error));
   }
   
+  
   return (
     <div className="w-full h-full">
+
       { !userLogged ? (
         <Home />
       ) : (
-        <div className="flex flex-col w-full h-full justify-center items-center gap-3 mt-24">
-          <Logo />
-  
-          <div className="w-full h-full flex justify-end pr-24">
-            <button
-              type="submit"
-              onClick={() => signOut(auth)}
-              className="flex justify-center gap-1 items-center text-lg font-semibold text-zinc-400 hover:text-zinc-300 border-2 hover:border-zinc-300 border-gpurple px-3 rounded-xl"
-            >
-              Sair
-              <FiX size={22} aria-label="Fechar" />
-            </button>
+        <div>
+           <Menu styles={ stylesMenu }>
+            <div>
+              <ul>
+                <li>Contas</li>
+                <li>alterar e-mail</li>
+                <li>alterar senha</li>
+                <li>Contato</li>
+              </ul>
+            </div>
+
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                onClick={() => signOut(auth)}
+                className="flex justify-center gap-1 mt-12 items-center text-lg font-semibold text-zinc-400 hover:text-zinc-300 border-2 hover:border-zinc-300 border-none "
+              >
+                Sair
+                <FiX size={22} aria-label="Fechar" />
+              </button>
+            </div>
+          </Menu>
+
+          <div className="flex flex-col w-full h-screen justify-center items-center gap-3 "> 
+
+            <Logo />
+    
+            {billsList.length > 0 && <Balance billsList={billsList} />}
+    
+            { loading ? 
+              (
+                <Loading/> 
+              ) : 
+              (
+                <BillsList billsList={billsList} />
+              )
+            }
+    
+            <ButtonOpenDialog handleAddBills={handleAddBills} />
           </div>
-  
-          {billsList.length > 0 && <Balance billsList={billsList} />}
-  
-          { loading ? 
-            (
-              <Loading/> 
-            ) : 
-            (
-              <BillsList billsList={billsList} />
-            )
-          }
-  
-          <ButtonOpenDialog handleAddBills={handleAddBills} />
         </div>
       )}
     </div>
