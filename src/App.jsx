@@ -7,7 +7,7 @@ import { BillsList } from './components/BillsList';
 import { ButtonOpenDialog } from './components/ButtonOpenDialog';
 import { FiX } from "react-icons/fi";
 import { bubble	 as Menu } from 'react-burger-menu'
-import { stylesMenu } from './utils/styleMenu';
+import { stylesMenu } from './styles/styleMenu';
 
 
 import './styles/global.css'
