@@ -26,4 +26,4 @@ Organizador de gastos que permite aos usuários adicionar e remover contas, alé
 
 ## 🔖 Layout
 
-Você pode visualizar o projeto através [DESSE LINK](organizador-tau.vercel.app).
+Você pode visualizar o projeto através [DESSE LINK](https://organizador-tau.vercel.app/).
