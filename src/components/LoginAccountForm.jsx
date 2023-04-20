@@ -5,6 +5,7 @@ import { SendNewPassword } from './SendNewPassword';
 
 import { FiX } from "react-icons/fi";
 import * as Dialog from '@radix-ui/react-dialog';
+import { verificaErro } from '../utils/handleErro';
 
 export function LoginAccountForm () {
   const [email, setEmail] = useState('');
@@ -22,7 +23,7 @@ export function LoginAccountForm () {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      setError(errorMessage)
+      setError(verificaErro(errorCode))
     });
   }
 
@@ -72,7 +73,7 @@ export function LoginAccountForm () {
                 Redefinir senha
               </Dialog.Title>
 
-                <p className='text-zinc-400 text-center'>Digite o seu e-mail cadastrado que enviaremos um e-mail para a redefinição de senha</p>
+                <p className='text-zinc-400 text-center pt-3'>Digite o seu e-mail cadastrado que enviaremos um e-mail para a redefinição de senha</p>
 
               <SendNewPassword />
 
@@ -82,7 +83,7 @@ export function LoginAccountForm () {
 
           </div>
 
-          {error && <p className='text-red-500'>Usuario não encontrado</p>}
+          {error && <p className='text-red-500'>{error}</p>}
 
           <button 
           type='submit'

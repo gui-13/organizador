@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebaseconfig';
 
+import { verificaErro } from '../utils/handleErro';
 
 export function NewAccountForm () {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   function addNewUser(e) {
@@ -24,6 +25,7 @@ export function NewAccountForm () {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setErrorMessage(verificaErro(errorCode))
         // ..
       });
     } else {
